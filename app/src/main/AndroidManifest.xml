@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="io.github.z3r0c00l_2k.aquadroid">
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
             android:allowBackup="true"
@@ -28,7 +28,8 @@
         <activity
                 android:name=".MainActivity"
                 android:theme="@style/MainTheme"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -37,7 +38,9 @@
         </activity>
 
         <receiver android:name=".recievers.NotifierReceiver"/>
-        <receiver android:name=".recievers.BootReceiver">
+        <receiver android:name=".recievers.BootReceiver"
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

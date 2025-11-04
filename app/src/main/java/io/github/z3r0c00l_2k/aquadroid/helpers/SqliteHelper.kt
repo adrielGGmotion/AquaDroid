@@ -55,7 +55,10 @@ class SqliteHelper(val context: Context) : SQLiteOpenHelper(
         val db = this.readableDatabase
         db.rawQuery(selectQuery, arrayOf(date)).use {
             if (it.moveToFirst()) {
-                return it.getInt(it.getColumnIndex(KEY_INTOOK))
+                val index = it.getColumnIndex(KEY_INTOOK)
+                if (index != -1) {
+                    return it.getInt(index)
+                }
             }
         }
         return 0

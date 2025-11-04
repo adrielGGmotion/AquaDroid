@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import kotlinx.android.synthetic.main.activity_walk_through.*
+import io.github.z3r0c00l_2k.aquadroid.databinding.ActivityWalkThroughBinding
 
 class WalkThroughActivity : AppCompatActivity() {
     private var viewPagerAdapter: WalkThroughAdapter? = null
+    private lateinit var binding: ActivityWalkThroughBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +23,16 @@ class WalkThroughActivity : AppCompatActivity() {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
 
-        setContentView(R.layout.activity_walk_through)
+        binding = ActivityWalkThroughBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewPagerAdapter = WalkThroughAdapter(supportFragmentManager)
-        walkThroughPager.adapter = viewPagerAdapter
-        indicator.setViewPager(walkThroughPager)
+        binding.walkThroughPager.adapter = viewPagerAdapter
+        binding.indicator.setViewPager(binding.walkThroughPager)
     }
 
     override fun onStart() {
         super.onStart()
-        getStarted.setOnClickListener {
+        binding.getStarted.setOnClickListener {
 
             startActivity(Intent(this, InitUserInfoActivity::class.java))
             finish()
@@ -38,7 +40,7 @@ class WalkThroughActivity : AppCompatActivity() {
         }
     }
 
-    private inner class WalkThroughAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private inner class WalkThroughAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getCount(): Int {
             return 3
         }

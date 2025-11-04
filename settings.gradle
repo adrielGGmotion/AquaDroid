@@ -1,1 +1,3 @@
 include ':app'
+include ':libs:waveloadingview:library'
+include ':libs:step-progress:step-progress'
