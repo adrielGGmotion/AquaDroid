@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: gradle-v2 # Use a new cache key
+        cache: gradle-v2
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
